@@ -13,15 +13,25 @@ module.exports = {
 
     return res.json(video);
   },
-  async index(req, res) {
-    const videos = await connection("videos").select("*");
+  async show(req, res) {
+    const { category_name } = req.body;
+    const videoByCategory = await connection("videos")
+      .where("category_name", category_name)
+      .select("*");
 
+    return res.json(videoByCategory);
+  },
+  async index(req, res) {
+    const category = req.headers.category;
+    const videos = await connection("videos")
+      .where("category_name", category)
+      .select("*");
     return res.json(videos);
   },
   async delete(req, res) {
-    const { name } = req.params;
+    const { id } = req.params;
 
-    await connection("videos").where("name", name).delete();
+    await connection("videos").where("id", id).delete();
 
     return res.json({ message: "deletado" });
   },

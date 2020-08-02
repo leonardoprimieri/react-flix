@@ -5,10 +5,11 @@ const routes = Router();
 
 routes.post("/videos", VideoController.store);
 routes.get("/videos", VideoController.index);
-routes.delete("/videos/:name", VideoController.delete);
+routes.post("/category", VideoController.show);
+routes.delete("/videos/:id", VideoController.delete);
 
 routes.post("/categories", CategoryController.store);
 routes.get("/categories", CategoryController.index);
-routes.delete("/categories/:name", CategoryController.delete);
+routes.delete("/categories/:url", CategoryController.delete);
 
 module.exports = routes;
